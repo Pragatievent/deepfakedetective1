@@ -244,6 +244,9 @@ function retakeQuiz() {
 }
 
 // Survey persistence & email deduplication logic (Sections A-E)
+// Replace with your actual SheetDB API URL from sheetdb.io
+const SHEETDB_API_URL = 'YOUR_SHEETDB_API_URL_HERE';
+
 let surveyDataSummary = {
     totalSubmissions: 0,
     ages: { "under 18": 0, "18 - 20": 0, "21 - 25": 0, "above 25": 0 },
@@ -257,35 +260,47 @@ let surveyDataSummary = {
 
 let submittedEmails = [];
 
-// Load stored survey data and emails on startup (with schema validation)
+// Fetch global survey data from Google Sheet on startup
 function loadStoredSurveyData() {
-    const savedData = localStorage.getItem('deepfakeSurveySummaryV2');
-    const savedEmails = localStorage.getItem('deepfakeSubmittedEmailsV2');
+    const statsEl = document.getElementById('result-stats');
+    if (statsEl) statsEl.innerHTML = `Loading live global results from Google Sheet...`;
 
-    if (savedData) {
-        try {
-            const parsed = JSON.parse(savedData);
-            // Ensure it matches the new Sections A-E schema
-            if (parsed.a && parsed.b && parsed.e) {
-                surveyDataSummary = parsed;
-            } else {
-                // Clear old mismatched cache
-                localStorage.removeItem('deepfakeSurveySummaryV2');
-                localStorage.removeItem('deepfakeSubmittedEmailsV2');
-            }
-        } catch (e) {
-            localStorage.removeItem('deepfakeSurveySummaryV2');
-        }
-    }
-    
-    if (savedEmails) {
-        try {
-            submittedEmails = JSON.parse(savedEmails);
-        } catch (e) {
+    fetch(SHEETDB_API_URL)
+        .then(response => response.json())
+        .then(rows => {
+            // Reset summary to recalculate from fetched rows
+            surveyDataSummary = {
+                totalSubmissions: 0,
+                ages: { "under 18": 0, "18 - 20": 0, "21 - 25": 0, "above 25": 0 },
+                occupations: { "Student": 0, "Working": 0, "Other": 0 },
+                a: { "Yes": 0, "No": 0 },
+                b: { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 },
+                c: { "Yes": 0, "No": 0, "Not Sure": 0 },
+                d: { "Check original source": 0, "Search for other reports": 0, "Ask someone": 0, "Share it anyway": 0, "Not sure": 0 },
+                e: { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 }
+            };
             submittedEmails = [];
-        }
-    }
-    renderSurveyStats();
+
+            // Process every row from the Google Sheet
+            rows.forEach(row => {
+                if (row.email) submittedEmails.push(row.email.trim().toLowerCase());
+                
+                surveyDataSummary.totalSubmissions++;
+                if (surveyDataSummary.ages[row.age] !== undefined) surveyDataSummary.ages[row.age]++;
+                if (surveyDataSummary.occupations[row.occupation] !== undefined) surveyDataSummary.occupations[row.occupation]++;
+                if (surveyDataSummary.a[row.a] !== undefined) surveyDataSummary.a[row.a]++;
+                if (surveyDataSummary.b[row.b] !== undefined) surveyDataSummary.b[row.b]++;
+                if (surveyDataSummary.c[row.c] !== undefined) surveyDataSummary.c[row.c]++;
+                if (surveyDataSummary.d[row.d] !== undefined) surveyDataSummary.d[row.d]++;
+                if (surveyDataSummary.e[row.e] !== undefined) surveyDataSummary.e[row.e]++;
+            });
+
+            renderSurveyStats();
+        })
+        .catch(error => {
+            console.error('Error fetching global data:', error);
+            if (statsEl) statsEl.innerHTML = `Unable to load live results. Please check your internet connection or API URL.`;
+        });
 }
 
 function renderBarChart(title, dataObj, total) {
@@ -328,7 +343,7 @@ function renderSurveyStats() {
     if (!statsEl) return;
 
     if (total === 0) {
-        statsEl.innerHTML = `No responses recorded yet. Be the first to submit via the Survey Form!`;
+        statsEl.innerHTML = `No responses recorded yet in the Google Sheet. Be the first to submit via the Survey Form!`;
         return;
     }
 
@@ -336,7 +351,7 @@ function renderSurveyStats() {
     const avgAfter = calculateAverage(surveyDataSummary.e);
 
     statsEl.innerHTML = `
-        <p style="font-size: 1.1rem; font-weight: bold; color: var(--accent); margin-bottom: 0.5rem;">Total Community Submissions: ${total}</p>
+        <p style="font-size: 1.1rem; font-weight: bold; color: var(--accent); margin-bottom: 0.5rem;">Total Global Submissions: ${total}</p>
         <p style="font-size: 0.95rem; color: var(--success); margin-bottom: 1rem;">
             📊 <strong>Measurable Outcome:</strong> Average confidence before was <strong>${avgBefore} / 5</strong>, and increased to <strong>${avgAfter} / 5</strong> after interacting with the awareness material!
         </p>
@@ -349,7 +364,7 @@ function renderSurveyStats() {
         ${renderBarChart('Section D: Action before sharing suspicious content', surveyDataSummary.d, total)}
         ${renderBarChart('Section E: Confidence After (1-5)', surveyDataSummary.e, total)}
         <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 1rem; font-family: 'JetBrains Mono', monospace;">
-            * Based on responses collected through this project.
+            * Live global data fetched directly from connected research Google Sheet.
         </p>
     `;
 }
@@ -366,6 +381,12 @@ function submitSurvey(event) {
     const d = document.getElementById('survey-d').value;
     const e = document.getElementById('survey-e').value;
 
+    // Check email duplication against fetched Google Sheet emails
+    if (submittedEmails.includes(email)) {
+        alert('⚠️ This email address has already submitted the survey. Each email is allowed only one submission.');
+        return;
+    }
+
     const formData = {
         email: email,
         age: age,
@@ -377,8 +398,8 @@ function submitSurvey(event) {
         e: e
     };
 
-    // Send data globally to your Google Sheet via SheetDB API
-    fetch('https://sheetdb.io/api/v1/gk1wu7kb0gzpc', {
+    // Send data globally to Google Sheet
+    fetch(SHEETDB_API_URL, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -390,11 +411,12 @@ function submitSurvey(event) {
     .then(data => {
         alert('Thank you! Your response has been recorded globally.');
         document.getElementById('community-survey').reset();
+        loadStoredSurveyData(); // Refresh stats from sheet
         switchSection('survey-results');
     })
     .catch(error => {
-        console.error('Error:', error);
-        alert('Submission failed. Please try again.');
+        console.error('Submission Error:', error);
+        alert('Submission failed. Please check your network connection.');
     });
 }
 
