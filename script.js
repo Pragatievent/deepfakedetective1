@@ -257,15 +257,33 @@ let surveyDataSummary = {
 
 let submittedEmails = [];
 
+// Load stored survey data and emails on startup (with schema validation)
 function loadStoredSurveyData() {
     const savedData = localStorage.getItem('deepfakeSurveySummaryV2');
     const savedEmails = localStorage.getItem('deepfakeSubmittedEmailsV2');
 
     if (savedData) {
-        surveyDataSummary = JSON.parse(savedData);
+        try {
+            const parsed = JSON.parse(savedData);
+            // Ensure it matches the new Sections A-E schema
+            if (parsed.a && parsed.b && parsed.e) {
+                surveyDataSummary = parsed;
+            } else {
+                // Clear old mismatched cache
+                localStorage.removeItem('deepfakeSurveySummaryV2');
+                localStorage.removeItem('deepfakeSubmittedEmailsV2');
+            }
+        } catch (e) {
+            localStorage.removeItem('deepfakeSurveySummaryV2');
+        }
     }
+    
     if (savedEmails) {
-        submittedEmails = JSON.parse(savedEmails);
+        try {
+            submittedEmails = JSON.parse(savedEmails);
+        } catch (e) {
+            submittedEmails = [];
+        }
     }
     renderSurveyStats();
 }
