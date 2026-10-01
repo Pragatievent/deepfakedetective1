@@ -11,7 +11,6 @@ function switchSection(sectionId) {
     const menuItems = document.querySelectorAll('.menu-item');
     menuItems.forEach(item => item.classList.remove('active'));
     
-    // Explicitly close mobile sidebar when navigating
     if (window.innerWidth <= 1024) {
         const sidebar = document.getElementById('app-sidebar');
         sidebar.classList.remove('mobile-open');
@@ -30,9 +29,9 @@ function toggleMobileSidebar() {
 
 // Multi-Slot Image Challenge Verification Logic (3 Slots)
 const imageChallengeAnswers = {
-    1: 'fake', // Slot 1: Executive Portrait (AI Fake)
-    2: 'real', // Slot 2: Scenic Landscape (Real)
-    3: 'fake'  // Slot 3: Food Dish Closeup (AI Fake)
+    1: 'fake', 
+    2: 'real', 
+    3: 'fake'  
 };
 
 const imageChallengeExplanations = {
@@ -56,9 +55,9 @@ function checkImageSlot(slotNumber, userChoice) {
 
 // Multi-Slot Video Challenge Verification Logic (3 Slots)
 const videoChallengeAnswers = {
-    1: 'fake', // Clip 1: The Celebrity Face-Swap (AI Fake)
-    2: 'real', // Clip 2: The Robotic Stare / Broadcast (Real)
-    3: 'fake'  // Clip 3: The Audio Delay (AI Fake)
+    1: 'fake', 
+    2: 'real', 
+    3: 'fake'  
 };
 
 const videoChallengeExplanations = {
@@ -80,22 +79,85 @@ function checkVideoSlot(slotNumber, userChoice) {
     }
 }
 
-// Interactive Quiz Logic with Score & Progress Tracking
+// Enhanced Scenario-Based Quiz Logic (8 Questions)
 const quizData = [
     {
-        question: "What neural network architecture is most commonly associated with generating realistic fake faces?",
-        options: ["GANs (Generative Adversarial Networks)", "SQL Databases", "TCP/IP Protocol", "SMTP Mail Servers"],
-        correct: 0
+        question: "You receive a video of a public official making a shocking statement. What should you do first?",
+        options: [
+            "Immediately share it on social media to warn others",
+            "Trust the video because high-definition video cannot be faked",
+            "Check the source and look for independent confirmation from mainstream journalism",
+            "Download and repost it in group chats"
+        ],
+        correct: 2,
+        explanation: "Correct! 🧠 Always verify source credibility and look for independent journalistic corroboration before reacting or sharing."
     },
     {
-        question: "Which of the following is a classic indicator of an audio deepfake?",
-        options: ["Mechanical robotic humming", "Unnatural breathing pauses or missing background room tone", "Crystal clear sound quality always", "Extremely loud volume"],
-        correct: 1
+        question: "What neural network architecture is most commonly associated with generating realistic synthetic images and faces?",
+        options: ["GANs (Generative Adversarial Networks)", "SQL Databases", "TCP/IP Protocol", "SMTP Mail Servers"],
+        correct: 0,
+        explanation: "Correct! 🧠 GANs pit two neural networks against each other (generator vs. discriminator) to produce hyper-realistic synthetic media."
     },
     {
         question: "What is 'The Liar's Dividend'?",
-        options: ["Financial payouts given to whistleblowers", "When real media evidence is dismissed as a deepfake", "A tax on AI software companies", "An algorithm reward"],
-        correct: 1
+        options: [
+            "Financial payouts given to whistleblowers who expose deepfakes",
+            "When real media evidence of misconduct is dismissed as 'just a deepfake'",
+            "A government tax on AI software developers",
+            "An algorithm reward for high accuracy detection"
+        ],
+        correct: 1,
+        explanation: "Correct! 🧠 The Liar's Dividend occurs when widespread awareness of deepfakes allows wrongdoers to falsely dismiss genuine evidence against them."
+    },
+    {
+        question: "Which of the following is a classic audio indicator of a voice clone/deepfake?",
+        options: [
+            "Mechanical robotic humming sounds throughout",
+            "Unnatural breathing pauses, metallic artifacts, or missing background room tone",
+            "Crystal clear studio sound quality always",
+            "Extremely high volume levels"
+        ],
+        correct: 1,
+        explanation: "Correct! 🧠 Voice clones often lack natural acoustic breathing transitions and acoustic room ambiance."
+    },
+    {
+        question: "True or False: All AI-generated synthetic media is inherently malicious and illegal.",
+        options: ["True", "False"],
+        correct: 1,
+        explanation: "Correct! 🧠 Synthetic media has valid uses in entertainment, video games, accessibility, and education. Harm arises from deceptive deployment."
+    },
+    {
+        question: "If a friend calls you sounding distressed and asking for an emergency wire transfer, but something sounds off, what is the safest protocol?",
+        options: [
+            "Send the money immediately to avoid delay",
+            "Hang up and call your friend back on their known, verified personal number",
+            "Ask them a secret password over the same call",
+            "Post the audio recording online"
+        ],
+        correct: 1,
+        explanation: "Correct! 🧠 Live audio deepfakes can impersonate voices in real-time. Always disconnect and verify via a separate known channel."
+    },
+    {
+        question: "Why is single-frame visual inspection alone unreliable for detecting AI video?",
+        options: [
+            "Because computers cannot process video frames",
+            "Because generative models constantly improve, and manual human eye detection can easily miss subtle artifacts",
+            "Because videos do not have pixels",
+            "Because the human eye is infallible"
+        ],
+        correct: 1,
+        explanation: "Correct! 🧠 AI models rapidly evolve to eliminate visual artifacts, making contextual source verification essential."
+    },
+    {
+        question: "What does STOP &rarr; CHECK &rarr; VERIFY &rarr; THEN SHARE mean in digital safety?",
+        options: [
+            "A video game cheat code",
+            "A disciplined workflow to prevent the viral spread of misinformation and synthetic media",
+            "An algorithm setting",
+            "A file compression standard"
+        ],
+        correct: 1,
+        explanation: "Correct! 🧠 Pausing before amplification halts the engagement loops that weaponize misinformation."
     }
 ];
 
@@ -106,6 +168,7 @@ function loadQuiz() {
     const progressEl = document.getElementById('quiz-progress');
     const questionEl = document.getElementById('quiz-question');
     const optionsEl = document.getElementById('quiz-options');
+    const explanationEl = document.getElementById('quiz-explanation');
     const nextBtn = document.getElementById('next-btn');
 
     if (currentQuizIndex < quizData.length) {
@@ -113,26 +176,40 @@ function loadQuiz() {
         if (progressEl) progressEl.innerHTML = `Question ${currentQuizIndex + 1} of ${quizData.length} &bull; Current Score: ${score}`;
         if (questionEl) questionEl.innerHTML = currentData.question;
         if (optionsEl) optionsEl.innerHTML = '';
+        if (explanationEl) explanationEl.innerHTML = '';
         if (nextBtn) nextBtn.style.display = 'none';
 
         currentData.options.forEach((option, index) => {
             const btn = document.createElement('button');
             btn.className = 'quiz-option-btn';
             btn.innerText = option;
-            btn.onclick = () => selectQuizOption(index, currentData.correct);
+            btn.onclick = () => selectQuizOption(index, currentData.correct, currentData.explanation);
             optionsEl.appendChild(btn);
         });
     } else {
         if (progressEl) progressEl.innerHTML = `Quiz Completed! 🎉`;
         if (questionEl) questionEl.innerHTML = `Final Evaluation Score: ${score} / ${quizData.length}`;
-        if (optionsEl) optionsEl.innerHTML = `<p style="text-align:center; font-weight:600; color:var(--success);">Great job testing your synthetic media literacy!</p>`;
+        
+        let badge = "Beginner 🟢";
+        if (score >= 6) badge = "Detective 🟣";
+        else if (score >= 4) badge = "Aware 🔵";
+
+        if (optionsEl) optionsEl.innerHTML = `
+            <div style="text-align:center; padding: 1rem;">
+                <p style="font-size: 1.2rem; font-weight: bold; color: var(--accent); margin-bottom: 0.5rem;">Rank: ${badge}</p>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Remember: realistic-looking content isn't automatically authentic. Verification matters.</p>
+                <button class="btn" onclick="retakeQuiz()">Retake Quiz</button>
+            </div>
+        `;
+        if (explanationEl) explanationEl.innerHTML = '';
         if (nextBtn) nextBtn.style.display = 'none';
     }
 }
 
-function selectQuizOption(selectedIndex, correctIndex) {
+function selectQuizOption(selectedIndex, correctIndex, explanationText) {
     const optionsEl = document.getElementById('quiz-options');
     const buttons = optionsEl.getElementsByTagName('button');
+    const explanationEl = document.getElementById('quiz-explanation');
 
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].disabled = true;
@@ -147,6 +224,10 @@ function selectQuizOption(selectedIndex, correctIndex) {
         score++;
     }
 
+    if (explanationEl) {
+        explanationEl.innerHTML = `<div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border: 1px solid var(--border-color);">${explanationText}</div>`;
+    }
+
     const nextBtn = document.getElementById('next-btn');
     if (nextBtn) nextBtn.style.display = 'block';
 }
@@ -156,26 +237,29 @@ function nextQuestion() {
     loadQuiz();
 }
 
-// Survey persistence & email deduplication logic
+function retakeQuiz() {
+    currentQuizIndex = 0;
+    score = 0;
+    loadQuiz();
+}
+
+// Survey persistence & email deduplication logic (Sections A-E)
 let surveyDataSummary = {
     totalSubmissions: 0,
     ages: { "under 18": 0, "18 - 20": 0, "21 - 25": 0, "above 25": 0 },
     occupations: { "Student": 0, "Working": 0, "Other": 0 },
-    q1: { "Yes": 0, "No": 0, "Not Sure": 0 },
-    q2: { "Yes": 0, "No": 0, "Not Sure": 0 },
-    q3: { "Yes": 0, "No": 0, "Not Sure": 0 },
-    q4: { "Yes": 0, "No": 0, "Not Sure": 0 },
-    q5: { "Image": 0, "Audio": 0, "Text": 0, "Not Sure": 0 },
-    q6: { "Yes": 0, "No": 0, "Not Sure": 0 },
-    q7: { "Yes": 0, "No": 0, "Not Sure": 0 }
+    a: { "Yes": 0, "No": 0 },
+    b: { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 },
+    c: { "Yes": 0, "No": 0, "Not Sure": 0 },
+    d: { "Check original source": 0, "Search for other reports": 0, "Ask someone": 0, "Share it anyway": 0, "Not sure": 0 },
+    e: { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 }
 };
 
 let submittedEmails = [];
 
-// Load stored survey data and emails on startup
 function loadStoredSurveyData() {
-    const savedData = localStorage.getItem('deepfakeSurveySummary');
-    const savedEmails = localStorage.getItem('deepfakeSubmittedEmails');
+    const savedData = localStorage.getItem('deepfakeSurveySummaryV2');
+    const savedEmails = localStorage.getItem('deepfakeSubmittedEmailsV2');
 
     if (savedData) {
         surveyDataSummary = JSON.parse(savedData);
@@ -206,6 +290,20 @@ function renderBarChart(title, dataObj, total) {
     return html;
 }
 
+function calculateAverage(dataObj) {
+    let sum = 0;
+    let count = 0;
+    for (let key in dataObj) {
+        let val = Number(key);
+        let freq = dataObj[key];
+        if (!isNaN(val)) {
+            sum += val * freq;
+            count += freq;
+        }
+    }
+    return count > 0 ? (sum / count).toFixed(1) : "0.0";
+}
+
 function renderSurveyStats() {
     const total = surveyDataSummary.totalSubmissions;
     const statsEl = document.getElementById('result-stats');
@@ -216,18 +314,25 @@ function renderSurveyStats() {
         return;
     }
 
+    const avgBefore = calculateAverage(surveyDataSummary.b);
+    const avgAfter = calculateAverage(surveyDataSummary.e);
+
     statsEl.innerHTML = `
-        <p style="font-size: 1.1rem; font-weight: bold; color: var(--accent); margin-bottom: 1rem;">Total Community Submissions: ${total}</p>
+        <p style="font-size: 1.1rem; font-weight: bold; color: var(--accent); margin-bottom: 0.5rem;">Total Community Submissions: ${total}</p>
+        <p style="font-size: 0.95rem; color: var(--success); margin-bottom: 1rem;">
+            📊 <strong>Measurable Outcome:</strong> Average confidence before was <strong>${avgBefore} / 5</strong>, and increased to <strong>${avgAfter} / 5</strong> after interacting with the awareness material!
+        </p>
         <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1rem 0;">
         ${renderBarChart('Age Demographics', surveyDataSummary.ages, total)}
         ${renderBarChart('Occupation', surveyDataSummary.occupations, total)}
-        ${renderBarChart('1. Heard of deepfakes?', surveyDataSummary.q1, total)}
-        ${renderBarChart('2. Encountered AI content online?', surveyDataSummary.q2, total)}
-        ${renderBarChart('3. Can identify a deepfake?', surveyDataSummary.q3, total)}
-        ${renderBarChart('4. Checked source of suspicious posts?', surveyDataSummary.q4, total)}
-        ${renderBarChart('5. Most encountered AI content type?', surveyDataSummary.q5, total)}
-        ${renderBarChart('6. Believe deepfakes can be used for scams?', surveyDataSummary.q6, total)}
-        ${renderBarChart('7. Want to learn more about identifying AI?', surveyDataSummary.q7, total)}
+        ${renderBarChart('Section A: Heard of deepfakes before?', surveyDataSummary.a, total)}
+        ${renderBarChart('Section B: Confidence Before (1-5)', surveyDataSummary.b, total)}
+        ${renderBarChart('Section C: Encountered AI content online?', surveyDataSummary.c, total)}
+        ${renderBarChart('Section D: Action before sharing suspicious content', surveyDataSummary.d, total)}
+        ${renderBarChart('Section E: Confidence After (1-5)', surveyDataSummary.e, total)}
+        <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 1rem; font-family: 'JetBrains Mono', monospace;">
+            * Based on responses collected through this project.
+        </p>
     `;
 }
 
@@ -237,39 +342,31 @@ function submitSurvey(event) {
     const email = document.getElementById('survey-email').value.trim().toLowerCase();
     const age = document.getElementById('survey-age').value;
     const occupation = document.getElementById('survey-occupation').value;
-    const q1 = document.getElementById('survey-q1').value;
-    const q2 = document.getElementById('survey-q2').value;
-    const q3 = document.getElementById('survey-q3').value;
-    const q4 = document.getElementById('survey-q4').value;
-    const q5 = document.getElementById('survey-q5').value;
-    const q6 = document.getElementById('survey-q6').value;
-    const q7 = document.getElementById('survey-q7').value;
+    const a = document.getElementById('survey-a').value;
+    const b = document.getElementById('survey-b').value;
+    const c = document.getElementById('survey-c').value;
+    const d = document.getElementById('survey-d').value;
+    const e = document.getElementById('survey-e').value;
 
-    // Check if email has already submitted
     if (submittedEmails.includes(email)) {
         alert('⚠️ This email address has already submitted the survey. Each email is allowed only one submission.');
         return;
     }
 
-    if (email && age && occupation && q1 && q2 && q3 && q4 && q5 && q6 && q7) {
-        // Record email
+    if (email && age && occupation && a && b && c && d && e) {
         submittedEmails.push(email);
-        localStorage.setItem('deepfakeSubmittedEmails', JSON.stringify(submittedEmails));
+        localStorage.setItem('deepfakeSubmittedEmailsV2', JSON.stringify(submittedEmails));
 
-        // Update counts
         surveyDataSummary.totalSubmissions++;
         surveyDataSummary.ages[age]++;
         surveyDataSummary.occupations[occupation]++;
-        surveyDataSummary.q1[q1]++;
-        surveyDataSummary.q2[q2]++;
-        surveyDataSummary.q3[q3]++;
-        surveyDataSummary.q4[q4]++;
-        surveyDataSummary.q5[q5]++;
-        surveyDataSummary.q6[q6]++;
-        surveyDataSummary.q7[q7]++;
+        surveyDataSummary.a[a]++;
+        surveyDataSummary.b[b]++;
+        surveyDataSummary.c[c]++;
+        surveyDataSummary.d[d]++;
+        surveyDataSummary.e[e]++;
 
-        // Save persistently to localStorage
-        localStorage.setItem('deepfakeSurveySummary', JSON.stringify(surveyDataSummary));
+        localStorage.setItem('deepfakeSurveySummaryV2', JSON.stringify(surveyDataSummary));
 
         alert('Thank you for submitting your survey response!');
 
@@ -278,6 +375,7 @@ function submitSurvey(event) {
         switchSection('survey-results');
     }
 }
+
 // Initialize Quiz and Stored Survey Data instantly when HTML is ready
 document.addEventListener('DOMContentLoaded', function() {
     loadQuiz();
