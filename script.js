@@ -366,32 +366,36 @@ function submitSurvey(event) {
     const d = document.getElementById('survey-d').value;
     const e = document.getElementById('survey-e').value;
 
-    if (submittedEmails.includes(email)) {
-        alert('⚠️ This email address has already submitted the survey. Each email is allowed only one submission.');
-        return;
-    }
+    const formData = {
+        email: email,
+        age: age,
+        occupation: occupation,
+        a: a,
+        b: b,
+        c: c,
+        d: d,
+        e: e
+    };
 
-    if (email && age && occupation && a && b && c && d && e) {
-        submittedEmails.push(email);
-        localStorage.setItem('deepfakeSubmittedEmailsV2', JSON.stringify(submittedEmails));
-
-        surveyDataSummary.totalSubmissions++;
-        surveyDataSummary.ages[age]++;
-        surveyDataSummary.occupations[occupation]++;
-        surveyDataSummary.a[a]++;
-        surveyDataSummary.b[b]++;
-        surveyDataSummary.c[c]++;
-        surveyDataSummary.d[d]++;
-        surveyDataSummary.e[e]++;
-
-        localStorage.setItem('deepfakeSurveySummaryV2', JSON.stringify(surveyDataSummary));
-
-        alert('Thank you for submitting your survey response!');
-
+    // Send data globally to your Google Sheet via SheetDB API
+    fetch('https://sheetdb.io/api/v1/gk1wu7kb0gzpc', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('Thank you! Your response has been recorded globally.');
         document.getElementById('community-survey').reset();
-        renderSurveyStats();
         switchSection('survey-results');
-    }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Submission failed. Please try again.');
+    });
 }
 
 // Initialize Quiz and Stored Survey Data instantly when HTML is ready
