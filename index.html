@@ -55,15 +55,18 @@
                 <i class="fa-solid fa-brain"></i><span>Quiz</span>
             </li>
 
-            <div class="menu-category">Community</div>
+            <div class="menu-category">Community & Field Study</div>
             <li class="menu-item" onclick="switchSection('survey-hub')">
                 <i class="fa-solid fa-chart-bar"></i><span>Field Survey</span>
                 <i class="fa-solid fa-chevron-right menu-indicator"></i>
             </li>
 
+            <div class="menu-category">Resources</div>
+            <li class="menu-item" onclick="switchSection('quick-guide')">
+                <i class="fa-solid fa-book-open"></i><span>Quick Guide</span>
+            </li>
             <li class="menu-item" onclick="switchSection('awareness')">
                 <i class="fa-solid fa-bullhorn"></i><span>Awareness</span>
-                <i class="fa-solid fa-chevron-right menu-indicator"></i>
             </li>
             <li class="menu-item" onclick="switchSection('references')">
                 <i class="fa-solid fa-book"></i><span>References</span>
@@ -79,152 +82,167 @@
         <!-- Home Section -->
         <section id="home" class="content-section active">
             <div class="hero-card">
-                <h2>Welcome to Deepfake Detective 🛡️</h2>
-                <p>Your interactive investigator manual and toolkit for identifying synthetic media, understanding deepfake technology, and protecting digital truth.</p>
-                <button class="btn" onclick="switchSection('ai-hub')">Start Investigating <i class="fa-solid fa-arrow-right"></i></button>
+                <span style="background: rgba(59,130,246,0.1); color: var(--accent); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; display: inline-block; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace;">DEEPFAKE DETECTIVE</span>
+                <h2>Can you tell what's real?</h2>
+                <p>Learn how AI-generated images, videos and audio are created, discover the risks they create, and test your ability to spot manipulated content.</p>
+                <div class="button-group" style="margin-top: 1.5rem;">
+                    <button class="btn" onclick="switchSection('ai-hub')">Learn About Deepfakes <i class="fa-solid fa-arrow-right"></i></button>
+                    <button class="btn" style="background: transparent; border: 1px solid var(--border-color); color: var(--text-main);" onclick="switchSection('spot-hub')">Test Your Skills <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+                <div style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">
+                    Images &bull; Videos &bull; Voice &bull; Awareness
+                </div>
             </div>
+
+            <!-- Statistic Strip -->
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.2rem 1.5rem; border-radius: 8px; margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;">
+                <i class="fa-solid fa-shield-halved" style="color: var(--accent); font-size: 1.5rem;"></i>
+                <p style="margin: 0; font-size: 0.95rem; color: var(--text-main);"><strong>Media Literacy Notice:</strong> AI-generated content is becoming increasingly difficult to distinguish from authentic media. Critical verification and source tracing are essential digital survival skills.</p>
+            </div>
+
+            <!-- What You'll Learn -->
+            <h3 style="margin-bottom: 1rem;">What you'll learn</h3>
             <div class="card-grid">
                 <div class="card" onclick="switchSection('ai-hub')">
-                    <h3><i class="fa-solid fa-robot"></i> Understand AI</h3>
-                    <p>Learn how machine learning models generate hyper-realistic audio, video, and imagery.</p>
+                    <h3><i class="fa-solid fa-brain"></i> Understand</h3>
+                    <p>What deepfakes are and how they're created using neural networks.</p>
                     <span class="card-link-text">Explore Topics <i class="fa-solid fa-arrow-right"></i></span>
                 </div>
                 <div class="card" onclick="switchSection('spot-hub')">
-                    <h3><i class="fa-solid fa-magnifying-glass"></i> Spot the Fake</h3>
-                    <p>Put your observational skills to the test with interactive detection mini-challenges.</p>
+                    <h3><i class="fa-solid fa-magnifying-glass"></i> Detect</h3>
+                    <p>Learn clues and verification techniques across images and video.</p>
                     <span class="card-link-text">Take Challenge <i class="fa-solid fa-arrow-right"></i></span>
                 </div>
-                <div class="card" onclick="switchSection('quiz')">
-                    <h3><i class="fa-solid fa-brain"></i> Test Your Knowledge</h3>
-                    <p>Take our curated quizzes to evaluate your digital literacy and security preparedness.</p>
-                    <span class="card-link-text">Start Quiz <i class="fa-solid fa-arrow-right"></i></span>
+                <div class="card" onclick="switchSection('risks-hub')">
+                    <h3><i class="fa-solid fa-triangle-exclamation"></i> Recognize Risks</h3>
+                    <p>Understand scams, misinformation, and identity misuse.</p>
+                    <span class="card-link-text">View Risks <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+                <div class="card" onclick="switchSection('quick-guide')">
+                    <h3><i class="fa-solid fa-circle-check"></i> Verify</h3>
+                    <p>Learn what to do before believing or sharing content.</p>
+                    <span class="card-link-text">Read Guide <i class="fa-solid fa-arrow-right"></i></span>
                 </div>
             </div>
         </section>
 
-        <!-- ================= UNDERSTANDING AI HUB & TOPICS ================= -->
+        <!-- ================= EDUCATION HUB ================= -->
         <section id="ai-hub" class="content-section">
-            <h2>Understanding AI</h2>
-            <p>Explore the core concepts behind artificial intelligence and how modern machine learning models construct synthetic media. Click any topic below to read more:</p>
-            <div class="card-grid">
-                <div class="card" onclick="switchSection('what-is-ai')">
-                    <h3><i class="fa-solid fa-file-lines"></i> What is AI-Generated Content?</h3>
-                    <p>Learn how generative algorithms create brand new text, images, and audio from training data.</p>
+            <h2>Understanding AI & Synthetic Media</h2>
+            <p>Explore the core concepts behind artificial intelligence and how modern machine learning models construct synthetic media through a progressive learning path:</p>
+            
+            <div class="info-box" style="margin-bottom: 1.5rem;">
+                <h3>Section 1 — What is AI-generated content?</h3>
+                <p>AI-generated content refers to media created or modified using artificial intelligence algorithms.</p>
+                <div class="card-grid" style="margin-top: 1rem;">
+                    <div class="card challenge-slot-card"><h3>🖼️ AI Image</h3><p>Pixels painted by diffusion models from text prompts.</p></div>
+                    <div class="card challenge-slot-card"><h3>🎬 AI Video</h3><p>Synthetic or face-swapped motion frames generated via neural networks.</p></div>
+                    <div class="card challenge-slot-card"><h3>🎙️ AI Audio</h3><p>Wavelengths cloned or synthesized from short voice samples.</p></div>
+                    <div class="card challenge-slot-card"><h3>📝 AI Text</h3><p>Predictive language models generating human-like writing.</p></div>
                 </div>
-                <div class="card" onclick="switchSection('what-are-deepfakes')">
-                    <h3><i class="fa-solid fa-masks-theater"></i> What are Deepfakes?</h3>
-                    <p>Understand how human likenesses are swapped or synthesized using neural networks.</p>
+            </div>
+
+            <div class="info-box" style="margin-bottom: 1.5rem;">
+                <h3>Section 2 — What is a deepfake?</h3>
+                <p style="text-align: center; font-family: 'JetBrains Mono', monospace; background: var(--bg-primary); padding: 1rem; border-radius: 6px; margin: 1rem 0; border: 1px dashed var(--border-color);">
+                    Real Person &rarr; AI Neural Model &rarr; Manipulated Media
+                </p>
+                <p><strong>Deepfakes</strong> are AI-generated or AI-manipulated media that can make a person appear to say or do something that didn't actually happen.</p>
+            </div>
+
+            <div class="info-box" style="margin-bottom: 1.5rem;">
+                <h3>Section 3 — Types of Deepfakes</h3>
+                <div class="card-grid" style="margin-top: 1rem;">
+                    <div class="card challenge-slot-card">
+                        <h3>🎭 Face Swap</h3>
+                        <p><strong>What happens:</strong> One person's facial features are digitally replaced with another's.</p>
+                        <p style="margin-top: 0.5rem;"><strong>Uses:</strong> Entertainment, memes, scams, malicious impersonation.</p>
+                        <p style="margin-top: 0.5rem; color: var(--danger);"><strong>Main Risk:</strong> Identity misuse.</p>
+                    </div>
+                    <div class="card challenge-slot-card">
+                        <h3>🎙️ Voice Clone</h3>
+                        <p><strong>What happens:</strong> Mimics a specific human voice using audio samples.</p>
+                        <p style="margin-top: 0.5rem;"><strong>Uses:</strong> Audiobooks, virtual assistants, phone fraud.</p>
+                        <p style="margin-top: 0.5rem; color: var(--danger);"><strong>Main Risk:</strong> Financial scams & audio impersonation.</p>
+                    </div>
+                    <div class="card challenge-slot-card">
+                        <h3>🧑‍💻 Puppet Avatar</h3>
+                        <p><strong>What happens:</strong> Drives a still photograph or 3D model using a live speaker's head movements.</p>
+                        <p style="margin-top: 0.5rem;"><strong>Uses:</strong> Customer service bots, digital avatars.</p>
+                        <p style="margin-top: 0.5rem; color: var(--danger);"><strong>Main Risk:</strong> Fabricated press statements.</p>
+                    </div>
                 </div>
-                <div class="card" onclick="switchSection('types-of-deepfakes')">
-                    <h3><i class="fa-solid fa-shapes"></i> Types of Deepfakes</h3>
-                    <p>Explore face-swaps, voice clones, and puppet-driven avatars.</p>
-                </div>
+            </div>
+
+            <div class="info-box" style="border-left: 4px solid var(--success);">
+                <h4>⚖️ AI-generated &ne; automatically harmful</h4>
+                <p>Synthetic media has legitimate, positive applications in entertainment, video game design, language translation, accessibility tools, and digital education. The concern arises specifically when synthetic content is deployed deceptively or without appropriate disclosure.</p>
             </div>
         </section>
 
-        <section id="what-is-ai" class="content-section">
-            <button class="back-btn" onclick="switchSection('ai-hub')"><i class="fa-solid fa-arrow-left"></i> Back to Understanding AI</button>
-            <h2>What is AI-Generated Content?</h2>
-            <p>Artificial Intelligence generated content (Generative AI) refers to algorithms (such as GANs and Diffusion models) that create brand new text, images, audio, or video based on massive amounts of training data.</p>
-            <div class="info-box">
-                <h4>Key Takeaway:</h4>
-                <p>Unlike traditional computer graphics created manually by artists, generative AI predicts and synthesizes pixels or sound waves automatically.</p>
-            </div>
-        </section>
-
-        <section id="what-are-deepfakes" class="content-section">
-            <button class="back-btn" onclick="switchSection('ai-hub')"><i class="fa-solid fa-arrow-left"></i> Back to Understanding AI</button>
-            <h2>What are Deepfakes?</h2>
-            <p>Deepfakes are a specific subset of synthetic media where a person in an existing image or video is replaced with someone else's likeness using deep learning neural networks.</p>
-        </section>
-
-        <section id="types-of-deepfakes" class="content-section">
-            <button class="back-btn" onclick="switchSection('ai-hub')"><i class="fa-solid fa-arrow-left"></i> Back to Understanding AI</button>
-            <h2>Types of Deepfakes</h2>
-            <div class="card-grid">
-                <div class="card">
-                    <h3>1. Face Swaps</h3>
-                    <p>Overlays one person's facial features onto another body in video footage.</p>
-                </div>
-                <div class="card">
-                    <h3>2. Voice Clones (Audio)</h3>
-                    <p>Mimics a specific human voice using only a few seconds of audio samples.</p>
-                </div>
-                <div class="card">
-                    <h3>3. Puppet Avatars</h3>
-                    <p>Drives a still photograph using a live speaker's facial movements.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= RISKS & IMPACT HUB & TOPICS ================= -->
+        <!-- ================= RISKS & IMPACT HUB ================= -->
         <section id="risks-hub" class="content-section">
-            <h2>Risks & Impact</h2>
-            <p>Examine the societal, political, and financial dangers posed by synthetic media and deepfake technology. Select a topic below:</p>
+            <h2>Risks & Impact Scenarios</h2>
+            <p>Examine how synthetic media creates real-world dangers across society:</p>
+            
             <div class="card-grid">
-                <div class="card" onclick="switchSection('misinformation')">
-                    <h3><i class="fa-solid fa-bullhorn"></i> Misinformation</h3>
-                    <p>How deepfakes alter public discourse and fabricate breaking news.</p>
+                <!-- Scam Scenario -->
+                <div class="card challenge-slot-card">
+                    <h3><i class="fa-solid fa-wallet" style="color: var(--danger);"></i> 💰 Financial Scams</h3>
+                    <p><strong>Scenario:</strong> Someone receives a video call that appears to show a family member asking for urgent money transfers.</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem;"><strong>Consequences:</strong> Emotional pressure &rarr; Financial loss &rarr; Impersonation.</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--success);"><strong>Defensive Action:</strong> Stop &rarr; Verify through an independent channel &rarr; Never send money immediately.</p>
                 </div>
-                <div class="card" onclick="switchSection('scams-fraud')">
-                    <h3><i class="fa-solid fa-wallet"></i> Scams & Fraud</h3>
-                    <p>Financial scams utilizing live voice cloning and video calls.</p>
+
+                <!-- Misinformation Scenario -->
+                <div class="card challenge-slot-card">
+                    <h3><i class="fa-solid fa-bullhorn" style="color: var(--accent);"></i> 📰 Misinformation</h3>
+                    <p><strong>Scenario:</strong> A fabricated video of a public official declaring a fake crisis spreads across social feeds.</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem;"><strong>Pipeline:</strong> Fake video &rarr; Viral social media &rarr; Millions of viewers &rarr; False public belief.</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--success);"><strong>Defensive Action:</strong> Check mainstream journalism archives before reacting.</p>
                 </div>
-                <div class="card" onclick="switchSection('identity-misuse')">
-                    <h3><i class="fa-solid fa-id-card"></i> Identity Misuse</h3>
-                    <p>Unauthorized use of personal likenesses for non-consensual content.</p>
+
+                <!-- Identity Misuse -->
+                <div class="card challenge-slot-card">
+                    <h3><i class="fa-solid fa-id-card" style="color: var(--danger);"></i> 👤 Identity Misuse</h3>
+                    <p><strong>Scenario:</strong> Private individuals or public figures have their likenesses appropriated for non-consensual imagery or harassment.</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem;"><strong>Impact:</strong> Reputational damage and psychological harm.</p>
                 </div>
-                <div class="card" onclick="switchSection('social-impact')">
-                    <h3><i class="fa-solid fa-users"></i> Social Impact</h3>
-                    <p>The "Liar's Dividend" and the erosion of public trust.</p>
+
+                <!-- Loss of Trust / Liars Dividend -->
+                <div class="card challenge-slot-card">
+                    <h3><i class="fa-solid fa-scale-balanced" style="color: var(--accent);"></i> 🧠 Loss of Trust (The Liar's Dividend)</h3>
+                    <p><strong>Concept:</strong> As people realize realistic media can be fabricated, genuine video or audio evidence of wrongdoing can be easily dismissed as "just a deepfake."</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--danger);"><strong>Impact:</strong> Complete erosion of accountability and objective truth.</p>
                 </div>
+            </div>
+
+            <!-- Summary Rule Card -->
+            <div class="info-box" style="margin-top: 2rem; text-align: center; border: 2px solid var(--accent);">
+                <h4 style="color: var(--accent); margin-bottom: 0.5rem;">🚨 Before you believe or share</h4>
+                <p style="font-size: 1.1rem; font-weight: bold; margin: 0; font-family: 'JetBrains Mono', monospace;">STOP &rarr; CHECK &rarr; VERIFY &rarr; THEN SHARE</p>
             </div>
         </section>
 
-        <section id="misinformation" class="content-section">
-            <button class="back-btn" onclick="switchSection('risks-hub')"><i class="fa-solid fa-arrow-left"></i> Back to Risks & Impact</button>
-            <h2>Misinformation</h2>
-            <p>How deepfakes are weaponized to alter public discourse, manipulate elections, and fabricate historical or breaking news events.</p>
-        </section>
-
-        <section id="scams-fraud" class="content-section">
-            <button class="back-btn" onclick="switchSection('risks-hub')"><i class="fa-solid fa-arrow-left"></i> Back to Risks & Impact</button>
-            <h2>Scams & Fraud</h2>
-            <p>Financial scams utilizing live voice cloning or video calls to deceive employees into unauthorized money transfers or impersonate family members in distress.</p>
-        </section>
-
-        <section id="identity-misuse" class="content-section">
-            <button class="back-btn" onclick="switchSection('risks-hub')"><i class="fa-solid fa-arrow-left"></i> Back to Risks & Impact</button>
-            <h2>Identity Misuse</h2>
-            <p>The unauthorized use of private citizens' or public figures' likenesses for non-consensual imagery, harassment, or malicious impersonation.</p>
-        </section>
-
-        <section id="social-impact" class="content-section">
-            <button class="back-btn" onclick="switchSection('risks-hub')"><i class="fa-solid fa-arrow-left"></i> Back to Risks & Impact</button>
-            <h2>Social Impact</h2>
-            <p>Erosion of trust in digital media, leading to the <strong>"Liar's Dividend"</strong>—where guilty individuals can dismiss authentic evidence of misconduct as "just a deepfake."</p>
-        </section>
-
-        <!-- ================= SPOT THE FAKE HUB & TOPICS ================= -->
+        <!-- ================= SPOT THE FAKE HUB ================= -->
         <section id="spot-hub" class="content-section">
             <h2>Spot the Fake</h2>
-            <p>Put your observational skills to the test with interactive detection mini-challenges and verification guidelines.</p>
+            <p>Put your observational skills to the test with our interactive detection mini-challenges and verification guidelines.</p>
             <div class="card-grid">
                 <div class="card" onclick="switchSection('image-challenge')">
                     <h3><i class="fa-solid fa-image"></i> Image Challenge</h3>
                     <p>Test your eye across 3 distinct image slots (Real vs. AI).</p>
+                    <span class="card-link-text">Start Challenge <i class="fa-solid fa-arrow-right"></i></span>
                 </div>
                 <div class="card" onclick="switchSection('video-challenge')">
                     <h3><i class="fa-solid fa-video"></i> Video Challenge</h3>
                     <p>Interactive video analysis across 3 distinct video clip slots.</p>
+                    <span class="card-link-text">Start Challenge <i class="fa-solid fa-arrow-right"></i></span>
                 </div>
-                <div class="card" onclick="switchSection('detection-checklist')">
-                    <h3><i class="fa-solid fa-id-badge"></i> Detection Checklist</h3>
-                    <p>Quick reference field card you can screenshot or download.</p>
-                </div>
-                <div class="card" onclick="switchSection('verification-guide')">
-                    <h3><i class="fa-solid fa-list-check"></i> Verification Guide</h3>
+                <div class="card" onclick="switchSection('quick-guide')">
+                    <h3><i class="fa-solid fa-id-badge"></i> Quick Verification Guide</h3>
                     <p>Step-by-step checklist for evaluating suspicious media.</p>
+                    <span class="card-link-text">View Guide <i class="fa-solid fa-arrow-right"></i></span>
                 </div>
             </div>
         </section>
@@ -251,7 +269,7 @@
                 <!-- Slot 2 -->
                 <div class="card challenge-slot-card">
                     <div class="mock-image-container" style="padding: 0; overflow: hidden;">
-                        <img src="landscape.jpg" alt="Executive Portrait" style="width: 100%; height: 180px; object-fit: cover; display: block;">
+                        <img src="landscape.jpg" alt="Scenic Landscape" style="width: 100%; height: 180px; object-fit: cover; display: block;">
                     </div>
                     <div class="button-group" style="justify-content: center; margin-bottom: 1rem;">
                         <button class="btn btn-success" onclick="checkImageSlot(2, 'real')">Real</button>
@@ -263,7 +281,7 @@
                 <!-- Slot 3 -->
                 <div class="card challenge-slot-card">
                     <div class="mock-image-container" style="padding: 0; overflow: hidden;">
-                        <img src="food.jpg" alt="Executive Portrait" style="width: 100%; height: 180px; object-fit: cover; display: block;">
+                        <img src="food.jpg" alt="Food Dish" style="width: 100%; height: 180px; object-fit: cover; display: block;">
                     </div>
                     <div class="button-group" style="justify-content: center; margin-bottom: 1rem;">
                         <button class="btn btn-success" onclick="checkImageSlot(3, 'real')">Real</button>
@@ -274,7 +292,7 @@
             </div>
         </section>
 
-        <!-- INTERACTIVE VIDEO CHALLENGE WITH 3 SLOTS -->
+        <!-- VIDEO CHALLENGE WITH 3 SLOTS -->
         <section id="video-challenge" class="content-section">
             <button class="back-btn" onclick="switchSection('spot-hub')"><i class="fa-solid fa-arrow-left"></i> Back to Spot the Fake</button>
             <h2>Video Challenge</h2>
@@ -323,175 +341,173 @@
                     <p id="video-feedback-3" class="slot-feedback" style="font-size: 0.9rem; font-weight: 500; min-height: 40px;"></p>
                 </div>
             </div>
+
+            <!-- Scientific Warning Box -->
+            <div class="info-box" style="margin-top: 2rem; border-left: 4px solid var(--danger);">
+                <h4>⚠️ Important Scientific Disclaimer</h4>
+                <p><strong>No single visual clue proves that something is AI-generated.</strong> AI detection by appearance alone is not always 100% reliable. When in doubt, always verify the source and context independently.</p>
+            </div>
         </section>
 
-        <!-- SCREENSHOT-FRIENDLY DETECTION CHECKLIST -->
-        <section id="detection-checklist" class="content-section">
+        <!-- ================= QUICK GUIDE & VERIFICATION ================= -->
+        <section id="quick-guide" class="content-section">
             <button class="back-btn" onclick="switchSection('spot-hub')"><i class="fa-solid fa-arrow-left"></i> Back to Spot the Fake</button>
-            <h2>Deepfake Detection Checklist</h2>
-            <p>Screenshot or download this quick-reference investigator badge for offline analysis:</p>
+            <h2>Quick Verification Guide</h2>
+            <p>Follow these steps when you encounter suspicious media online:</p>
+            
             <div class="info-box" style="border: 2px solid var(--accent); background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));">
                 <h3 style="color: var(--accent); margin-bottom: 1rem;"><i class="fa-solid fa-id-badge"></i> Investigator Field Card</h3>
-                <ul style="list-style: none; padding: 0; line-height: 2.2; color: var(--text-main);">
-                    <li><i class="fa-solid fa-square-check" style="color: var(--success);"></i> <strong>Check the Eyes & Blinks:</strong> Unnatural pauses or robotic blinking frequencies.</li>
-                    <li><i class="fa-solid fa-square-check" style="color: var(--success);"></i> <strong>Inspect Skin & Jawline:</strong> Look for subtle blurring or color blending artifacts.</li>
-                    <li><i class="fa-solid fa-square-check" style="color: var(--success);"></i> <strong>Evaluate Lighting:</strong> Do shadows match environmental light sources?</li>
-                    <li><i class="fa-solid fa-square-check" style="color: var(--success);"></i> <strong>Listen to Audio:</strong> Check for metallic artifacts, room tone drops, or lip-sync delay.</li>
-                    <li><i class="fa-solid fa-square-check" style="color: var(--success);"></i> <strong>Trace the Source:</strong> Can trusted journalism outlets confirm this story?</li>
-                </ul>
+                <ol style="padding-left: 1.5rem; color: var(--text-main); line-height: 2.2;">
+                    <li><strong>Stop:</strong> Do not immediately react or share suspicious media.</li>
+                    <li><strong>Check the Source:</strong> Who published it? Is it an official or verified account?</li>
+                    <li><strong>Search:</strong> Perform a reverse image search or look for original reporting in major news outlets.</li>
+                    <li><strong>Examine Clues:</strong> Inspect lip-syncing, lighting angles, and texture blending around edges.</li>
+                    <li><strong>Cross-Check:</strong> Find independent confirmation from trustworthy journalism sources.</li>
+                    <li><strong>Think Before Sharing:</strong> If you are unsure, do not amplify unverified content.</li>
+                </ol>
                 <div style="margin-top: 1.5rem; text-align: center; font-size: 0.8rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">
-                    DEEPFAKE DETECTIVE TOOLKIT — VERIFIED REFERENCE CARD
+                    DEEPFAKE DETECTIVE TOOLKIT &mdash; OFFICIAL VERIFIED REFERENCE CARD
                 </div>
             </div>
         </section>
 
-        <section id="verification-guide" class="content-section">
-            <button class="back-btn" onclick="switchSection('spot-hub')"><i class="fa-solid fa-arrow-left"></i> Back to Spot the Fake</button>
-            <h2>Verification Guide</h2>
-            <p>Follow these steps when you encounter suspicious media online:</p>
-            <ol style="padding-left: 1.5rem; color: var(--text-muted); line-height: 1.8;">
-                <li><strong>Reverse Image Search:</strong> Check if the image appears elsewhere in legitimate news archives.</li>
-                <li><strong>Inspect Details:</strong> Look closely at ears, teeth, glasses frames, and background text.</li>
-                <li><strong>Verify the Source:</strong> Look for confirmation from mainstream, trusted journalism organizations.</li>
-            </ol>
-        </section>
-
-        <!-- Quiz Section -->
+        <!-- ================= QUIZ SECTION ================= -->
         <section id="quiz" class="content-section">
-            <h2>Interactive Quiz</h2>
-            <p>Test your knowledge on deepfakes and AI detection.</p>
+            <h2>Interactive Evaluation Quiz</h2>
+            <p>Test your knowledge and scenario reasoning on deepfakes and AI detection.</p>
             <div class="quiz-box" id="quiz-container">
                 <div id="quiz-progress" style="font-size: 0.85rem; color: var(--accent); margin-bottom: 0.5rem; font-weight: 600;"></div>
                 <h3 id="quiz-question">Loading question...</h3>
                 <div id="quiz-options" class="quiz-options"></div>
+                <div id="quiz-explanation" style="margin-top: 1rem; font-size: 0.95rem; line-height: 1.6;"></div>
                 <button id="next-btn" class="btn" style="margin-top: 1.5rem; display:none;" onclick="nextQuestion()">Next Question</button>
             </div>
         </section>
 
-        <!-- ================= FIELD SURVEY HUB & TOPICS ================= -->
+        <!-- ================= FIELD SURVEY HUB & FORM ================= -->
+        <section id="survey-hub" class="content-section">
+            <h2>Field Survey & Research Study</h2>
+            <p>Contribute to our community research on deepfake awareness and view live aggregated results.</p>
+            <div class="card-grid">
+                <div class="card" onclick="switchSection('survey-form')">
+                    <h3><i class="fa-solid fa-square-poll-horizontal"></i> Survey Form</h3>
+                    <p>Share your experience and test your awareness shift before/after using the toolkit.</p>
+                    <span class="card-link-text">Take Survey <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+                <div class="card" onclick="switchSection('survey-results')">
+                    <h3><i class="fa-solid fa-chart-pie"></i> Results & Graphs</h3>
+                    <p>View real-time aggregated response statistics and pre/post confidence metrics.</p>
+                    <span class="card-link-text">View Results <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </div>
+        </section>
+
         <section id="survey-form" class="content-section">
-    <button class="back-btn" onclick="switchSection('survey-hub')"><i class="fa-solid fa-arrow-left"></i> Back to Field Survey</button>
-    <h2>Field Survey</h2>
-    <p>Please complete our research survey on deepfake awareness:</p>
-    <div class="survey-box">
-        <form id="community-survey" onsubmit="submitSurvey(event)">
-            <!-- Email Field for One-Time Submission -->
-            <div style="margin-bottom: 1.2rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 600;">Email Address:</label>
-                <input type="email" id="survey-email" class="form-select" placeholder="Enter your email to submit..." required>
+            <button class="back-btn" onclick="switchSection('survey-hub')"><i class="fa-solid fa-arrow-left"></i> Back to Field Survey</button>
+            <h2>Research Field Survey Form</h2>
+            <p>Please complete our research survey on deepfake awareness. (Each email address allows one verified submission):</p>
+            
+            <div class="survey-box">
+                <form id="community-survey" onsubmit="submitSurvey(event)">
+                    <!-- Email Verification -->
+                    <div style="margin-bottom: 1.2rem;">
+                        <label style="display:block; margin-bottom: 0.4rem; font-weight: 600;">Email Address:</label>
+                        <input type="email" id="survey-email" class="form-select" placeholder="Enter your email to submit..." required>
+                    </div>
+
+                    <!-- Demographics -->
+                    <div style="margin-bottom: 1.2rem;">
+                        <label style="display:block; margin-bottom: 0.4rem; font-weight: 600;">Age:</label>
+                        <select id="survey-age" class="form-select" required>
+                            <option value="">Select Age Group...</option>
+                            <option value="under 18">Under 18</option>
+                            <option value="18 - 20">18 - 20</option>
+                            <option value="21 - 25">21 - 25</option>
+                            <option value="above 25">Above 25</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display:block; margin-bottom: 0.4rem; font-weight: 600;">Occupation:</label>
+                        <select id="survey-occupation" class="form-select" required>
+                            <option value="">Select Occupation...</option>
+                            <option value="Student">Student</option>
+                            <option value="Working">Working</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
+
+                    <!-- Section A: Awareness -->
+                    <div style="margin-bottom: 1.2rem;">
+                        <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">Section A: Have you heard of deepfakes before this project?</label>
+                        <select id="survey-a" class="form-select" required>
+                            <option value="">Select an option...</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+
+                    <!-- Section B: Recognition Confidence Before -->
+                    <div style="margin-bottom: 1.2rem;">
+                        <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">Section B: How confident were you in identifying AI-generated content before visiting this site? (1 = Not confident, 5 = Very confident)</label>
+                        <select id="survey-b" class="form-select" required>
+                            <option value="">Select confidence score...</option>
+                            <option value="1">1 - Not confident</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5 - Very confident</option>
+                        </select>
+                    </div>
+
+                    <!-- Section C: Experience -->
+                    <div style="margin-bottom: 1.2rem;">
+                        <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">Section C: Have you ever encountered suspected AI-generated content online?</label>
+                        <select id="survey-c" class="form-select" required>
+                            <option value="">Select an option...</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="Not Sure">Not Sure</option>
+                        </select>
+                    </div>
+
+                    <!-- Section D: Behavior -->
+                    <div style="margin-bottom: 1.2rem;">
+                        <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">Section D: What is your primary action before sharing suspicious content?</label>
+                        <select id="survey-d" class="form-select" required>
+                            <option value="">Select action...</option>
+                            <option value="Check original source">Check original source</option>
+                            <option value="Search for other reports">Search for other reports</option>
+                            <option value="Ask someone">Ask someone</option>
+                            <option value="Share it anyway">Share it anyway</option>
+                            <option value="Not sure">Not sure</option>
+                        </select>
+                    </div>
+
+                    <!-- Section E: Learning Impact Confidence After -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">Section E: After exploring this website, how confident are you now? (1 = Not confident, 5 = Very confident)</label>
+                        <select id="survey-e" class="form-select" required>
+                            <option value="">Select confidence score...</option>
+                            <option value="1">1 - Not confident</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5 - Very confident</option>
+                        </select>
+                    </div>
+
+                    <button class="btn" type="submit" style="width: 100%;">Submit Survey Response</button>
+                </form>
             </div>
-
-            <!-- Demographics -->
-            <div style="margin-bottom: 1.2rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 600;">Age:</label>
-                <select id="survey-age" class="form-select" required>
-                    <option value="">Select Age Group...</option>
-                    <option value="under 18">Under 18</option>
-                    <option value="18 - 20">18 - 20</option>
-                    <option value="21 - 25">21 - 25</option>
-                    <option value="above 25">Above 25</option>
-                </select>
-            </div>
-
-            <div style="margin-bottom: 1.5rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 600;">Occupation:</label>
-                <select id="survey-occupation" class="form-select" required>
-                    <option value="">Select Occupation...</option>
-                    <option value="Student">Student</option>
-                    <option value="Working">Working</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-
-            <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
-
-            <!-- Q1 -->
-            <div style="margin-bottom: 1.2rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">1. Have you heard of deepfakes?</label>
-                <select id="survey-q1" class="form-select" required>
-                    <option value="">Select an option...</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                    <option value="Not Sure">Not Sure</option>
-                </select>
-            </div>
-
-            <!-- Q2 -->
-            <div style="margin-bottom: 1.2rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">2. Have you encountered AI-generated content online?</label>
-                <select id="survey-q2" class="form-select" required>
-                    <option value="">Select an option...</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                    <option value="Not Sure">Not Sure</option>
-                </select>
-            </div>
-
-            <!-- Q3 -->
-            <div style="margin-bottom: 1.2rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">3. Do you think you can identify a deepfake?</label>
-                <select id="survey-q3" class="form-select" required>
-                    <option value="">Select an option...</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                    <option value="Not Sure">Not Sure</option>
-                </select>
-            </div>
-
-            <!-- Q4 -->
-            <div style="margin-bottom: 1.2rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">4. Have you ever checked the source of a suspicious post?</label>
-                <select id="survey-q4" class="form-select" required>
-                    <option value="">Select an option...</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                    <option value="Not Sure">Not Sure</option>
-                </select>
-            </div>
-
-            <!-- Q5 -->
-            <div style="margin-bottom: 1.2rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">5. Which type of AI-generated content do you encounter most often?</label>
-                <select id="survey-q5" class="form-select" required>
-                    <option value="">Select content type...</option>
-                    <option value="Image">Image</option>
-                    <option value="Audio">Audio</option>
-                    <option value="Text">Text</option>
-                    <option value="Not Sure">Not Sure</option>
-                </select>
-            </div>
-
-            <!-- Q6 -->
-            <div style="margin-bottom: 1.2rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">6. Do you think deepfakes can be used for scams?</label>
-                <select id="survey-q6" class="form-select" required>
-                    <option value="">Select an option...</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                    <option value="Not Sure">Not Sure</option>
-                </select>
-            </div>
-
-            <!-- Q7 -->
-            <div style="margin-bottom: 1.5rem;">
-                <label style="display:block; margin-bottom: 0.4rem; font-weight: 500;">7. Would you like to learn more about identifying misleading AI content?</label>
-                <select id="survey-q7" class="form-select" required>
-                    <option value="">Select an option...</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                    <option value="Not Sure">Not Sure</option>
-                </select>
-            </div>
-
-            <button class="btn" type="submit" style="width: 100%;">Submit Response</button>
-        </form>
-    </div>
-</section>
+        </section>
 
         <section id="survey-results" class="content-section">
             <button class="back-btn" onclick="switchSection('survey-hub')"><i class="fa-solid fa-arrow-left"></i> Back to Field Survey</button>
-            <h2>Survey Results & Graphs</h2>
-            <p>Real-time visual statistics from community participants:</p>
+            <h2>Survey Results & Research Graphs</h2>
+            <p>Real-time visual statistics and measurable outcome comparisons based on responses collected through this project:</p>
             <div class="card">
                 <div id="result-stats" style="color: var(--text-muted); line-height: 1.6;">
                     No responses recorded yet. Be the first to submit via the Survey Form!
@@ -503,40 +519,12 @@
         <section id="awareness" class="content-section">
             <h2>Awareness & Community Action</h2>
             <p>Help educate friends, family, and colleagues about synthetic media risks by sharing digital literacy guides and practicing safe sharing habits.</p>
-            <div class="card-grid">
-                <div class="card" onclick="switchSection('action-guide')">
-                    <h3><i class="fa-solid fa-shield-halved"></i> Action Guide</h3>
-                    <p>What should I do if I see a suspected deepfake?</p>
-                    <span class="card-link-text">View Steps <i class="fa-solid fa-arrow-right"></i></span>
-                </div>
-            </div>
-        </section>
-
-        <!-- DEDICATED ACTION GUIDE SECTION -->
-        <section id="action-guide" class="content-section">
-            <button class="back-btn" onclick="switchSection('awareness')"><i class="fa-solid fa-arrow-left"></i> Back to Awareness</button>
-            <h2>What to Do If You See a Suspected Deepfake</h2>
-            <p>Encountered a piece of synthetic media that looks misleading or malicious? Follow these immediate investigator steps:</p>
-            <div class="card-grid">
-                <div class="card challenge-slot-card">
-                    <h3><i class="fa-solid fa-ban" style="color: var(--danger);"></i> 1. Do Not Share</h3>
-                    <p>Sharing unverified media—even to debunk it—amplifies its reach and feeds algorithmic engagement loops.</p>
-                </div>
-                <div class="card challenge-slot-card">
-                    <h3><i class="fa-solid fa-flag" style="color: var(--accent);"></i> 2. Report to Platform</h3>
-                    <p>Use the platform's reporting tool to flag the content under "Misinformation", "Impersonation", or "Synthetic Media".</p>
-                </div>
-                <div class="card challenge-slot-card">
-                    <h3><i class="fa-solid fa-circle-exclamation" style="color: var(--success);"></i> 3. Inform the Subject</h3>
-                    <p>If a private individual or public entity is being impersonated, notify them or relevant authorities immediately.</p>
-                </div>
-            </div>
         </section>
 
         <!-- REFERENCES SECTION -->
         <section id="references" class="content-section">
-            <h2>Sources & References</h2>
-            <p>Academic research, benchmark datasets, and legal analysis underpinning this toolkit:</p>
+            <h2>References & Sources</h2>
+            <p>Academic research, benchmark datasets, and methodology underpinning this toolkit:</p>
             <div class="info-box">
                 <ul style="padding-left: 1.2rem; color: var(--text-muted); line-height: 1.8;">
                     <li><strong>Deepfake Detection Challenge (DFDC):</strong> Meta, AWS, Microsoft, and academic collaborators benchmark dataset.</li>
@@ -550,7 +538,7 @@
         <!-- About Project Section -->
         <section id="about" class="content-section">
             <h2>About Project</h2>
-            <p><strong>Deepfake Detective</strong> was created to empower everyday internet users with the tools, knowledge, and intuition to navigate an AI-saturated media landscape safely and critically.</p>
+            <p><strong>Deepfake Detective</strong> was created as an academic and community awareness initiative to empower everyday internet users with the tools, knowledge, and intuition required to navigate an AI-saturated media landscape safely and critically.</p>
         </section>
     </main>
 
