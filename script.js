@@ -245,7 +245,7 @@ function retakeQuiz() {
 
 // Survey persistence & email deduplication logic (Sections A-E)
 // Replace with your actual SheetDB API URL from sheetdb.io
-const SHEETDB_API_URL = 'YOUR_SHEETDB_API_URL_HERE';
+const SHEETDB_API_URL = 'https://sheetdb.io/api/v1/gk1wu7kb0gzpc';
 
 let surveyDataSummary = {
     totalSubmissions: 0,
